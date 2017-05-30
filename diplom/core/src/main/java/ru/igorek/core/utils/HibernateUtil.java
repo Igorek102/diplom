@@ -34,7 +34,8 @@ public class HibernateUtil {
             File file = new File(pathToFile);
             Configuration configuration = new Configuration().configure(file);
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-            MetadataSources sources = new MetadataSources(serviceRegistry).addAnnotatedClass(TestEntity.class);
+            MetadataSources sources = new MetadataSources(serviceRegistry)
+                    .addAnnotatedClass(TestEntity.class);
             sessionFactory = sources.buildMetadata().buildSessionFactory();
         }
         /**

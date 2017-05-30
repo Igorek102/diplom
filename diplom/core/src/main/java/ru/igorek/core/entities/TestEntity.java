@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * @author Игорек
  */
 @Entity
-public class TestEntity implements Serializable{
+public class TestEntity implements Serializable, IEntity{
     @Id
     private long id;
 
