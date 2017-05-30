@@ -10,5 +10,6 @@
     <module>diplom-ear</module>
     <module>diplom-web</module>
     <module>diplom-ejb</module>
+    <module>core</module>
   </modules>
 </project>
