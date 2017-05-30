@@ -3,18 +3,11 @@
 <hibernate-configuration>
   <session-factory>
     <!-- Настройки подключения к БД -->
-    <!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://localhost:3306/lab5</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/diplom</property>
     <property name="connection.username">root</property>
     <property name="connection.password">igorek</property> 
-    <property name="dialect">org.hibernate.dialect.MySQLDialect</property> -->
-    
-    <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-    <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-    <property name="hibernate.connection.url">jdbc:sqlserver://IGOREK:1433;databaseName=test;</property>
-    <property name="hibernate.connection.username">admin</property>
-    <property name="hibernate.connection.password">admin</property>
-    
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>    
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.connection.pool_size">1</property>
     <property name="hibernate.current_session_context_class">thread</property>
