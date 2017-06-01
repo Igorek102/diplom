@@ -19,7 +19,7 @@ import ru.igorek.core.model.ResourceUser;
  * @author Игорек
  */
 public class HibernateUtil {
-        private static final String DEFAULT_HIBERNATE_CONFIG_PATH = "src/main/resources/hibernate/hibernate.cfg.xml";
+        private static final String DEFAULT_HIBERNATE_CONFIG_PATH = ConfigurationUtil.getConfigurationEntry("DEFAULT_HIBERNATE_CONFIG_PATH");
         private static ServiceRegistry serviceRegistry;
         private static String pathToFile;
         private static SessionFactory sessionFactory;
@@ -40,7 +40,7 @@ public class HibernateUtil {
             Configuration configuration = new Configuration().configure(file);
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             MetadataSources sources = new MetadataSources(serviceRegistry)
-                    .addResource("hibernate/named-queries.hbm.xml")
+                    .addResource(ConfigurationUtil.getConfigurationEntry("HIBERNATE_NAMED_QUERIES"))
                     .addAnnotatedClass(Application.class)
                     .addAnnotatedClass(Event.class)
                     .addAnnotatedClass(History.class)
