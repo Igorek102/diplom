@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.igorek.core.utils.HibernateUtil;
-import ru.igorek.core.entities.IEntity;
+import model.IEntity;
 
 /**
  *
