@@ -1,8 +1,8 @@
-package model;
+package ru.igorek.core.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,34 +12,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author Игорек
  */
 @Entity
-public class History implements Serializable, IEntity{
+public class History implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long historyId;
     
     @OneToOne
-    @JoinColumn(name = "applicationId")
+    @JoinColumn(name = "applicationId", unique = true)
     private Application application;
     
-    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Event> events = new HashSet<>();
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Event> events = new ArrayList<>();
 
     public History() {
     }
 
-    public long getId() {
+    public long getHistoryId() {
         return historyId;
     }
 
-    public void setId(long id) {
-        this.historyId = id;
+    public void setHistoryId(long historyId) {
+        this.historyId = historyId;
     }
 
     public Application getApplication() {
@@ -50,11 +49,11 @@ public class History implements Serializable, IEntity{
         this.application = application;
     }
 
-    public Set<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Set<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 }

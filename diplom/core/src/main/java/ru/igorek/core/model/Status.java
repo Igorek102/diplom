@@ -1,4 +1,4 @@
-package model;
+package ru.igorek.core.model;
 
 /**
  *

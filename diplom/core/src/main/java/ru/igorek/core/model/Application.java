@@ -1,32 +1,26 @@
-package model;
+package ru.igorek.core.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.ConstraintMode;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  *
  * @author Игорек
  */
 @Entity
-public class Application implements Serializable, IEntity{
+public class Application implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long applicationId;
@@ -35,26 +29,27 @@ public class Application implements Serializable, IEntity{
     @JoinColumn(name = "resource_url", nullable = false)
     private Resource resource;
     
+    @Column(nullable = false)
     private String name;
     private String description;
+    @Column(nullable = false)
     private String path;
     
-    @OneToOne(mappedBy = "application", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "application", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private History history;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "application_parameters", joinColumns = @JoinColumn(name = "applicationId"), inverseJoinColumns = @JoinColumn(name = "parameterId"))
-    private Set<Parameter> parameters = new HashSet<>();
+    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    private List<Parameter> parameters = new ArrayList<>();
 
     public Application() {
     }
 
-    public long getId() {
+    public long getApplicationId() {
         return applicationId;
     }
 
-    public void setId(long id) {
-        this.applicationId = id;
+    public void setApplicationId(long applicationId) {
+        this.applicationId = applicationId;
     }
 
     public Resource getResource() {
@@ -97,11 +92,11 @@ public class Application implements Serializable, IEntity{
         this.history = history;
     }
 
-    public Set<Parameter> getParameters() {
+    public List<Parameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter> parameters) {
+    public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
     }
 }

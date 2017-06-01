@@ -1,4 +1,4 @@
-package model;
+package ru.igorek.core.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ import javax.persistence.MapKeyColumn;
  * @author Игорек
  */
 @Entity
-public class Parameter implements Serializable,IEntity{
+public class Parameter implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long parameterId;
@@ -31,16 +30,12 @@ public class Parameter implements Serializable,IEntity{
     @MapKeyColumn(name = "valueName")
     @Column(name = "valueDescription")
     private Map<String, String> values = new HashMap<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "applicationId", nullable = false)
+    private Application application;
 
     public Parameter() {
-    }
-
-    public long getId() {
-        return parameterId;
-    }
-
-    public void setId(long id) {
-        this.parameterId = id;
     }
 
     public String getParameterName() {
@@ -65,5 +60,21 @@ public class Parameter implements Serializable,IEntity{
 
     public void setValues(Map<String, String> values) {
         this.values = values;
+    }
+
+    public long getParameterId() {
+        return parameterId;
+    }
+
+    public void setParameterId(long parameterId) {
+        this.parameterId = parameterId;
+    }
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
     }
 }

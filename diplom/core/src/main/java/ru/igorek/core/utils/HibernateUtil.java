@@ -1,17 +1,18 @@
 package ru.igorek.core.utils;
 
 import java.io.File;
-import model.Application;
-import model.Event;
-import model.History;
-import model.Parameter;
-import model.Resource;
+import ru.igorek.core.model.Application;
+import ru.igorek.core.model.Event;
+import ru.igorek.core.model.History;
+import ru.igorek.core.model.Parameter;
+import ru.igorek.core.model.Resource;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import ru.igorek.core.model.ResourceUser;
 
 /**
  *
@@ -39,11 +40,13 @@ public class HibernateUtil {
             Configuration configuration = new Configuration().configure(file);
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             MetadataSources sources = new MetadataSources(serviceRegistry)
+                    .addResource("hibernate/named-queries.hbm.xml")
                     .addAnnotatedClass(Application.class)
                     .addAnnotatedClass(Event.class)
                     .addAnnotatedClass(History.class)
                     .addAnnotatedClass(Parameter.class)
-                    .addAnnotatedClass(Resource.class);
+                    .addAnnotatedClass(Resource.class)
+                    .addAnnotatedClass(ResourceUser.class);
             sessionFactory = sources.buildMetadata().buildSessionFactory();
         }
         /**

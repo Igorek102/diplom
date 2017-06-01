@@ -1,18 +1,16 @@
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-import model.Application;
-import model.History;
-import model.Parameter;
-import model.Resource;
-import org.hibernate.Session;
+import ru.igorek.core.model.Application;
+import ru.igorek.core.model.Parameter;
+import ru.igorek.core.model.Resource;
 import org.junit.Test;
-import ru.igorek.core.api.DBApi;
+import dao.DBApi;
+import java.util.Date;
+import java.util.List;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import ru.igorek.core.model.Event;
+import ru.igorek.core.model.ResourceUser;
+import ru.igorek.core.model.Status;
 import ru.igorek.core.utils.HibernateUtil;
 
 /**
@@ -27,116 +25,122 @@ public class TestHiber {
     public void createSchema(){}
     
     @Test
-    public void addUser(){
-        Session session =sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Resource resource = (Resource)session.get(Resource.class, "127.127.127.128");
-        resource.getUsers().put("qwe", "parol");
-        session.persist(resource);
-        transaction.commit();
-        session.close();
-        System.out.println(resource.getURL());
-    }
-    
-    @Test
     public void addResource(){
-        Resource resource = new Resource();
-        resource.setURL("127.127.127.128");
-        dBApi.addEntity(resource);
+        for (int i = 1; i < 10; i++) {
+            dBApi.addResource("126.0.0." + i);
+        }
     }
     
     @Test
-    public void getUsersByResource(){
-        
+    public void getAllResources(){
+        List<Resource> resources = dBApi.getAllResources();
+        resources.stream().forEach((resource) -> System.out.println(resource.getURL()));
     }
     
     @Test
     public void deleteResource(){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Resource resource = new Resource();
-        resource.setURL("127.127.127.127");
-        session.remove(resource);
-        transaction.commit();
-        session.close();
+        dBApi.deleteResource("127.0.0.2");
     }
     
     @Test
-    public void addApplication(){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Resource resource = (Resource)session.get(Resource.class, "127.127.127.128");
-        Application application = new Application();
-        application.setResource(resource);
-        resource.getApplications().add(application);
-        transaction.commit();
-        session.close();
+    public void addUsersToResources(){
+        List<Resource> resources = dBApi.getAllResources();
+        resources.stream().forEach((resource) -> {
+            for (int i = 0; i < 5; i++) {
+                dBApi.addUserToResource(resource.getURL(), "log"+i, "pass"+i);
+            }
+        });
+    }
+    
+    @Test
+    public void deleteUser(){
+        dBApi.deleteUser("127.0.0.2", "log1");
+    }
+    
+    @Test
+    public void getUsersByResource(){
+        Set<ResourceUser> users = dBApi.getUsersByResource("127.0.0.2");
+        users.stream().forEach((user) -> System.out.println(user.getLogin()));
+    }
+    
+    @Test
+    public void addApplicationToResource(){
+        List<Resource> resources = dBApi.getAllResources();
+        resources.stream().forEach((resource) -> {
+           for (int i = 0; i < 5; i++) {
+               dBApi.addApplicationToResource(resource.getURL(), "aaplication"+i, "path"+i);
+            } 
+        });
+    }
+    
+    @Test
+    public void deleteApplication(){
+        dBApi.deleteApplication(81);
     }
     
     @Test
     public void getApplicationsByResource(){
-        Session session = sessionFactory.openSession();
-        Resource resource = session.get(Resource.class, "127.127.127.128");
-        Set<Application> applications = new HashSet<>();
-        applications.addAll(resource.getApplications());
-        session.close();
-        applications.stream().forEach((application) -> System.out.println(application.getId()));
-    }
-    
-    @Test
-    public void getResourceByApplication(){
-        Session session = sessionFactory.openSession();
-        Resource resource = session.get(Application.class, 2l).getResource();
-        session.close();
-        System.out.println(resource.getURL());
+        List<Application> appls = dBApi.getApplicationsByResource("127.0.0.2");
+        appls.stream().forEach((application) -> System.out.println(application.getName()));
     }
     
     @Test
     public void addParameter(){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Parameter parameter = new Parameter();
-        parameter.setParameterName("parameter1");
-        session.get(Application.class, 1l).getParameters().add(parameter);
-        transaction.commit();
-        session.close();
+        List<Resource> resources = dBApi.getAllResources();
+        resources.stream().forEach((resource) -> {
+            List<Application> appls = dBApi.getApplicationsByResource(resource.getURL());
+            appls.stream().forEach((application) -> {
+                for (int i = 0; i < 2; i++) {
+                    dBApi.addParameterToApplication(application.getApplicationId(), "par"+i);
+                }
+            });
+        });
+    }
+    
+    @Test
+    public void getParametersByApplication(){
+        List<Parameter> parameters = dBApi.getParametersByApplication(85);
+        parameters.stream().forEach((parameter) -> System.out.println(parameter.getParameterId()));
+    }
+    
+    @Test
+    public void deleteParameter(){
+        dBApi.deleteParameter(161);
     }
     
     @Test
     public void addParameterValue(){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.get(Parameter.class, 2l).getValues().put("n", "name");
-        transaction.commit();
-        session.close();
+        for (int i = 0; i < 3; i++) {
+            dBApi.addParameterValue(161, "an"+i, "vd"+i);
+        }
+    }
+    
+    @Test
+    public void deleteParameterValue(){
+        dBApi.deleteParameterValue(161, "an1");
     }
     
     @Test
     public void getParameterValues(){
-        Session session = sessionFactory.openSession();
-        Map<String,String> values = new HashMap<>();
-        values.putAll(session.get(Parameter.class, 2l).getValues());
-        session.close();
+        Map<String,String> values = dBApi.getParameterValues(161);
         System.out.println(values);
     }
     
     @Test
-    public void addHistoryToApplication(){
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Application application = session.get(Application.class, 1l);
-        History history = new History();
-        history.setApplication(application);
-        application.setHistory(history);
-        transaction.commit();
-        session.close();
+    public void addEventToHistory(){
+        for (int i = 0; i < 5; i++) {
+            dBApi.addEventToHistory(83, new Date(), Status.FINISH);
+        }
     }
     
     @Test
-    public void getHistoryByApplication(){
-        Session session = sessionFactory.openSession();
-        History history = session.get(Application.class, 1l).getHistory();
-        session.close();
-        System.out.println(history.getId());
+    public void getHistory(){
+        List<Event> events = dBApi.getApplicationHistory(83);
+        events.stream().forEach((event) -> System.out.println(event.getDate() + " " + event.getStatus().toString()));
+    }
+    
+    @Test
+    public void clearHistory(){
+        dBApi.clearApplicationHistory(83);
     }
 }
