@@ -4,7 +4,7 @@ import ru.igorek.core.model.Application;
 import ru.igorek.core.model.Parameter;
 import ru.igorek.core.model.Resource;
 import org.junit.Test;
-import dao.DBApi;
+import ru.igorek.core.dao.DBApi;
 import java.util.Date;
 import java.util.List;
 import org.hibernate.SessionFactory;

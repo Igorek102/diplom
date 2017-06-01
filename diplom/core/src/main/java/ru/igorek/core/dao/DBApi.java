@@ -1,4 +1,4 @@
-package dao;
+package ru.igorek.core.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
