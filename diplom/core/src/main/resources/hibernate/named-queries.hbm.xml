@@ -8,4 +8,7 @@
     <query name="getAllResources">
         <![CDATA[from Resource]]>
     </query>
+    <query name="getAllUrls">
+        <![CDATA[select URL from Resource]]>
+    </query>
 </hibernate-mapping>

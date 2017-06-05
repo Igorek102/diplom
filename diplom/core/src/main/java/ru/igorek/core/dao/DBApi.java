@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import jdk.nashorn.internal.runtime.UserAccessorProperty;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,6 +37,13 @@ public class DBApi {
     public List<Resource> getAllResources(){
         Session session = sessionFactory.openSession();
         List<Resource> list = (List<Resource>)(session.getNamedQuery("getAllResources").list());
+        session.close();
+        return list;
+    }
+    
+    public List<String> getAllUrls(){
+        Session session = sessionFactory.openSession();
+        List<String> list = (List<String>)(session.getNamedQuery("getAllUrls").list());
         session.close();
         return list;
     }
@@ -191,5 +200,20 @@ public class DBApi {
         events.addAll(session.get(Application.class, applicationId).getHistory().getEvents());
         session.close();
         return events;
+    }
+    
+    public boolean checkLoginAndPassword(String resourceUrl, String login, String password){
+        boolean res = false;
+        Session session = sessionFactory.openSession();
+        Resource resource = new Resource();
+        resource.setURL(resourceUrl);
+        ResourceUser resourceUser = new ResourceUser();
+        resourceUser.setResource(resource);
+        resourceUser.setLogin(login);
+        Optional<ResourceUser> user = Optional.ofNullable(session.get(ResourceUser.class, resourceUser));
+        session.close();
+        if (user.isPresent())
+            res = user.get().getPassword().equals(password);
+        return res;
     }
 }

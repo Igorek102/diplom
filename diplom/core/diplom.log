@@ -1,3 +1,4 @@
 05.30:14.32.40DEBUG	ru.igorek.core.Main:14 - asd
 05.30:14.46.04DEBUG	ru.igorek.core.Main:16 - asd
 05.30:14.46.33DEBUG	ru.igorek.core.Main:16 - jdbc:mysql://localhost:3306/myDiplom
+06.05:20.22.39 INFO	ru.igorek.core.Main:77 - exit-status: 0

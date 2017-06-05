@@ -26,8 +26,8 @@ public class TestHiber {
     
     @Test
     public void addResource(){
-        for (int i = 1; i < 10; i++) {
-            dBApi.addResource("126.0.0." + i);
+        for (int i = 1; i < 20; i++) {
+            dBApi.addResource("127.0.0." + i);
         }
     }
     
@@ -35,6 +35,12 @@ public class TestHiber {
     public void getAllResources(){
         List<Resource> resources = dBApi.getAllResources();
         resources.stream().forEach((resource) -> System.out.println(resource.getURL()));
+    }
+    
+    @Test
+    public void getAllUrls(){
+        List<String> urls = dBApi.getAllUrls();
+        urls.stream().forEach((url) -> System.out.println(url));
     }
     
     @Test
@@ -142,5 +148,10 @@ public class TestHiber {
     @Test
     public void clearHistory(){
         dBApi.clearApplicationHistory(83);
+    }
+    
+    @Test
+    public void chechPass(){
+        System.out.println(dBApi.checkLoginAndPassword("127.0.0.1", "admin", "admi"));
     }
 }
