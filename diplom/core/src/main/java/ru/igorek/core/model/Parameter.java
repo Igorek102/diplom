@@ -25,6 +25,7 @@ public class Parameter implements Serializable{
     @Column(nullable = false)
     private String parameterName;
     private String parameterDescription;
+    private boolean flag;
     
     @ElementCollection
     @MapKeyColumn(name = "valueName")
@@ -76,5 +77,13 @@ public class Parameter implements Serializable{
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

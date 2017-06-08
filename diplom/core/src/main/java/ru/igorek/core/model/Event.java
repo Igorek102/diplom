@@ -20,7 +20,7 @@ public class Event implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventId;
     private Status status;
-    private Date date;
+    private Date dat;
     private String message;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "historyId", nullable = false)
@@ -38,11 +38,11 @@ public class Event implements Serializable{
     }
 
     public Date getDate() {
-        return date;
+        return dat;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.dat = date;
     }
 
     public String getDescription() {

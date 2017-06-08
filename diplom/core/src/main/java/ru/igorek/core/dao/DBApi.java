@@ -22,7 +22,7 @@ import ru.igorek.core.utils.HibernateUtil;
  */
 public class DBApi {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    
+    //
     public void addResource(String url){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -39,7 +39,7 @@ public class DBApi {
         session.close();
         return list;
     }
-    
+    //
     public List<String> getAllUrls(){
         Session session = sessionFactory.openSession();
         List<Resource> resources = session.createCriteria(Resource.class).list();
@@ -56,7 +56,7 @@ public class DBApi {
         transaction.commit();
         session.close();
     }
-    
+    //
     public void addUserToResource(String resourceUrl, String login, String password){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -87,23 +87,26 @@ public class DBApi {
         session.close();
         return users;
     }
-    
-    public void addApplicationToResource(String resourceUrl, String applicationName, String applicationPath){
+    //
+    public Application addApplicationToResource(String resourceUrl, String applicationName, String desc, String applicationPath){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Resource resource = session.get(Resource.class, resourceUrl);
         History history = new History();
         Application application = new Application();
         application.setName(applicationName);
+        application.setDescription(desc);
         application.setPath(applicationPath);
         history.setApplication(application);
         application.setHistory(history);
         application.setResource(resource);
         resource.getApplications().add(application);
         transaction.commit();
+        application = resource.getApplications().get(resource.getApplications().size()-1);
         session.close();
+        return application;
     }
-    
+    //
     public void updateApplication(Application application){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -111,7 +114,7 @@ public class DBApi {
         transaction.commit();
         session.close();
     }
-    
+    //
     public void deleteApplication(long applicationID){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -119,7 +122,7 @@ public class DBApi {
         transaction.commit();
         session.close();
     }
-    
+    //
     public List<Application> getApplicationsByResource(String resourceUrl){
         Session session = sessionFactory.openSession();
         List<Application> applications = new ArrayList<>();
@@ -128,14 +131,26 @@ public class DBApi {
         return applications;
     }
     
-    public void addParameterToApplication(long applicationId, String parameterName){
+    public Parameter addParameterToApplication(long applicationId, String parameterName, String desc, boolean isFlag){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Application application = session.get(Application.class, applicationId);
         Parameter parameter = new Parameter();
         parameter.setParameterName(parameterName);
+        parameter.setFlag(isFlag);
+        parameter.setParameterDescription(desc);
         parameter.setApplication(application);
         application.getParameters().add(parameter);
+        transaction.commit();
+        parameter = application.getParameters().get(application.getParameters().size()-1);
+        session.close();
+        return parameter;
+    }
+    
+    public void updateParameter(Parameter parameter){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(parameter);
         transaction.commit();
         session.close();
     }

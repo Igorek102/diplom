@@ -77,7 +77,7 @@ public class TestHiber {
         List<Resource> resources = dBApi.getAllResources();
         resources.stream().forEach((resource) -> {
            for (int i = 0; i < 5; i++) {
-               dBApi.addApplicationToResource(resource.getURL(), "aaplication"+i, "path"+i);
+               dBApi.addApplicationToResource(resource.getURL(), "aaplication"+i, "","path"+i);
             } 
         });
     }
@@ -100,7 +100,7 @@ public class TestHiber {
             List<Application> appls = dBApi.getApplicationsByResource(resource.getURL());
             appls.stream().forEach((application) -> {
                 for (int i = 0; i < 2; i++) {
-                    dBApi.addParameterToApplication(application.getApplicationId(), "par"+i);
+                    dBApi.addParameterToApplication(application.getApplicationId(), "par"+i, "desc" + i, true);
                 }
             });
         });

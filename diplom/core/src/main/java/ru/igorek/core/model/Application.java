@@ -3,6 +3,7 @@ package ru.igorek.core.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -102,6 +103,6 @@ public class Application implements Serializable{
 
     @Override
     public String toString() {
-        return "Application{" + "applicationId=" + applicationId + ", name=" + name + ", description=" + description + ", path=" + path + '}';
+        return "Application{" + "applicationId=" + applicationId + ", resource=" + resource + ", name=" + name + ", description=" + description + ", path=" + path + ", history=" + history + ", parameters=" + parameters + '}';
     }
 }

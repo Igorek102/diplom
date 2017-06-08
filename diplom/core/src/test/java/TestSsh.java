@@ -22,7 +22,7 @@ public class TestSsh {
     
     @Test 
     public void getData(){
-        List<String> info = sshApi.startApplication(HOSTNAME, SSH_PORT, USERNAME, PASSWORD);
+        List<String> info = sshApi.startApplication(HOSTNAME, SSH_PORT, USERNAME, PASSWORD, "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar");
         info.stream().forEach((string) -> System.out.println(string));
     }
     

@@ -25,10 +25,10 @@ public class SshApi {
     
     private static final int CONNECTION_TIMEOUT = 10000;
     
-    public List<String> startApplication(String resourceUrl, int port, String userLogin, String password){
+    public List<String> startApplication(String resourceUrl, int port, String userLogin, String password, String command){
         List<String> lines = new ArrayList<>();
         try {
-            String command = "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
+            //String command = "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
             Session session = initSession(resourceUrl, port, userLogin, password);
             Channel channel = initChannel(command, session);
             channel.connect();
