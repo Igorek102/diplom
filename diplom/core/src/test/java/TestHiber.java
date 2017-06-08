@@ -117,7 +117,7 @@ public class TestHiber {
         dBApi.deleteParameter(161);
     }
     
-    @Test
+    /*@Test
     public void addParameterValue(){
         for (int i = 0; i < 3; i++) {
             dBApi.addParameterValue(161, "an"+i, "vd"+i);
@@ -133,7 +133,7 @@ public class TestHiber {
     public void getParameterValues(){
         Map<String,String> values = dBApi.getParameterValues(161);
         System.out.println(values);
-    }
+    }*/
     
     @Test
     public void addEventToHistory(){

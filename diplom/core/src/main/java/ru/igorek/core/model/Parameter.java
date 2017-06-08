@@ -25,11 +25,7 @@ public class Parameter implements Serializable{
     @Column(nullable = false)
     private String parameterName;
     private String parameterDescription;
-    
-    @ElementCollection
-    @MapKeyColumn(name = "valueName")
-    @Column(name = "valueDescription")
-    private Map<String, String> values = new HashMap<>();
+    private boolean hasValue;
     
     @ManyToOne
     @JoinColumn(name = "applicationId", nullable = false)
@@ -54,14 +50,6 @@ public class Parameter implements Serializable{
         this.parameterDescription = parameterDescription;
     }
 
-    public Map<String, String> getValues() {
-        return values;
-    }
-
-    public void setValues(Map<String, String> values) {
-        this.values = values;
-    }
-
     public long getParameterId() {
         return parameterId;
     }
@@ -76,5 +64,13 @@ public class Parameter implements Serializable{
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public boolean isHasValue() {
+        return hasValue;
+    }
+
+    public void setHasValue(boolean hasValue) {
+        this.hasValue = hasValue;
     }
 }

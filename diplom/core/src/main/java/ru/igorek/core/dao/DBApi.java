@@ -156,7 +156,7 @@ public class DBApi {
         return parameters;
     }
     
-    public void addParameterValue(long parameterId, String valueName, String valueDescription){
+    /*public void addParameterValue(long parameterId, String valueName, String valueDescription){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.get(Parameter.class, parameterId).getValues().put(valueName, valueDescription);
@@ -179,7 +179,7 @@ public class DBApi {
         values.putAll(session.get(Parameter.class, parameterId).getValues());
         session.close();
         return values;
-    }
+    }*/
     
     public void clearApplicationHistory(long applicationId){
         Session session = sessionFactory.openSession();

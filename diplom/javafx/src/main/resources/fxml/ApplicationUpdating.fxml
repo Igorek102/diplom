@@ -7,18 +7,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="415.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.ApplicationUpdatingController">
-    <stylesheets>
-        <URL value="@/styles/applicationupdating.css" />
-    </stylesheets>
-   <children>
-      <TextField fx:id="nameTF" focusTraversable="false" layoutX="164.0" layoutY="46.0" />
-      <TextField fx:id="pathTF" focusTraversable="false" layoutX="164.0" layoutY="222.0" />
-      <Label layoutX="108.0" layoutY="51.0" text="Имя:" />
-      <Label layoutX="71.0" layoutY="138.0" text="Описание:" textAlignment="RIGHT" />
-      <Label layoutX="107.0" layoutY="227.0" text="Путь:" />
-      <Button focusTraversable="false" layoutX="96.0" layoutY="295.0" mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="95.0" text="Сохранить" />
-      <Button layoutX="225.0" layoutY="295.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="95.0" text="Отмена" />
-      <TextArea fx:id="descTF" focusTraversable="false" layoutX="164.0" layoutY="89.0" prefHeight="119.0" prefWidth="187.0" wrapText="true" />
-   </children>
-</AnchorPane>
+
+<TabPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.ApplicationUpdatingController">
+   <tabs>
+      <Tab text="Общие">
+         <content>
+            <AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="415.0" styleClass="mainFxmlClass">
+                <stylesheets>
+                    <URL value="@/styles/applicationupdating.css" />
+                </stylesheets>
+               <children>
+                  <TextField fx:id="nameTF" focusTraversable="false" layoutX="164.0" layoutY="46.0" />
+                  <TextField fx:id="pathTF" focusTraversable="false" layoutX="164.0" layoutY="222.0" />
+                  <Label layoutX="108.0" layoutY="51.0" text="Имя:" />
+                  <TextArea fx:id="descTF" focusTraversable="false" layoutX="164.0" layoutY="89.0" prefHeight="119.0" prefWidth="187.0" wrapText="true" />
+                  <Label layoutX="71.0" layoutY="138.0" text="Описание:" textAlignment="RIGHT" />
+                  <Label layoutX="107.0" layoutY="227.0" text="Путь:" />
+                  <Button focusTraversable="false" layoutX="96.0" layoutY="295.0" mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="95.0" text="Сохранить" />
+                  <Button layoutX="225.0" layoutY="295.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="95.0" text="Отмена" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Параметры">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
