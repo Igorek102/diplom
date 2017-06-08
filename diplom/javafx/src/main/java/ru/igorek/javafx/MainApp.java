@@ -25,6 +25,7 @@ public class MainApp extends Application {
         stage.setMinHeight(200);
         stage.setScene(scene);
         stage.show();
+        asdasd
     }
     
     @Override
