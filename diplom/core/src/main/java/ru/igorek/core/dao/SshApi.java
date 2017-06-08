@@ -28,7 +28,7 @@ public class SshApi {
     public List<String> startApplication(String resourceUrl, int port, String userLogin, String password){
         List<String> lines = new ArrayList<>();
         try {
-            String command = "d:\\Java\\jdk\\bin\\java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
+            String command = "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
             Session session = initSession(resourceUrl, port, userLogin, password);
             Channel channel = initChannel(command, session);
             channel.connect();
@@ -42,7 +42,7 @@ public class SshApi {
         return lines;
     }
     
-    private Session initSession(String host, int port, String userLogin, String password) throws JSchException {
+    public Session initSession(String host, int port, String userLogin, String password) throws JSchException {
         JSch jsch = new JSch();
         Session session = jsch.getSession(userLogin, host, port);
         session.setPassword(password);
@@ -83,7 +83,7 @@ public class SshApi {
     
     public String getDataFromLocalHost() throws IOException{
         Runtime runtime = Runtime.getRuntime();
-	String cmd = "d:\\Java\\jdk\\bin\\java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
+	String cmd = "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
 	Process proc = runtime.exec(cmd);
 		
 	InputStream is = proc.getInputStream();
@@ -99,6 +99,25 @@ public class SshApi {
             result.append("\n");
         }
         return result.toString();
+    }
+    
+    public boolean isResourceAvailable(String resourceUrl, int port){
+        boolean isAvailabe = false;
+        try{
+            JSch jSch = new JSch();
+            Session session = jSch.getSession("`",resourceUrl, port);
+            session.setConfig("StrictHostKeyChecking", "no");
+            session.connect(CONNECTION_TIMEOUT);
+        }
+        catch(Exception e){
+            if (e.getMessage().equals("Auth fail"))
+                isAvailabe = true;
+        }
+        return isAvailabe;
+    }
+    
+    public void closeSession(Session session){
+        session.disconnect();
     }
     
     class ResourceUserInfo implements UserInfo {

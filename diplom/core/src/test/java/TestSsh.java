@@ -1,5 +1,6 @@
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import java.io.IOException;
 import java.util.List;
 import org.junit.Test;
 import ru.igorek.core.dao.SshApi;
@@ -29,14 +30,24 @@ public class TestSsh {
     public void getSes() {
         try{
             JSch jSch = new JSch();
-            Session session = jSch.getSession(HOSTNAME);
+            Session session = jSch.getSession("127.0.0.1");
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect(CONNECTION_TIMEOUT);
-            System.out.println(session.isConnected());
-            session.disconnect();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
+    
+    @Test
+    public void getOSName(){
+        System.out.println(System.getProperty("os.name"));
+        System.out.println(System.getProperty("os.version"));
+        System.out.println(System.getProperty("user.name"));
+    }
+    
+    @Test
+    public void tst() throws IOException{
+        System.out.println(sshApi.getDataFromLocalHost());
     }
 }

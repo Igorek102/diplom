@@ -1,6 +1,13 @@
 package ru.igorek.core.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ru.igorek.core.model.Application;
 import ru.igorek.core.model.Event;
 import ru.igorek.core.model.History;
@@ -25,7 +32,7 @@ public class HibernateUtil {
         private static SessionFactory sessionFactory;
 
         public HibernateUtil(String path) {
-            this.pathToFile = path;
+            pathToFile = path;
         }
         
         
@@ -33,29 +40,44 @@ public class HibernateUtil {
         * Создание фабрики
         * @throws HibernateException
         */
-        private static void configureSessionFactory() throws HibernateException {
-            if (pathToFile == null)
-                pathToFile = DEFAULT_HIBERNATE_CONFIG_PATH;
-            File file = new File(pathToFile);
-            Configuration configuration = new Configuration().configure(file);
-            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-            MetadataSources sources = new MetadataSources(serviceRegistry)
-                    .addResource(ConfigurationUtil.getConfigurationEntry("HIBERNATE_NAMED_QUERIES"))
-                    .addAnnotatedClass(Application.class)
-                    .addAnnotatedClass(Event.class)
-                    .addAnnotatedClass(History.class)
-                    .addAnnotatedClass(Parameter.class)
-                    .addAnnotatedClass(Resource.class)
-                    .addAnnotatedClass(ResourceUser.class);
-            sessionFactory = sources.buildMetadata().buildSessionFactory();
+        private static void configureSessionFactory() {
+            try {
+                if (pathToFile == null)
+                    pathToFile = DEFAULT_HIBERNATE_CONFIG_PATH;
+                File file = getFile(pathToFile);
+                Configuration configuration = new Configuration().configure(file);
+                serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+                MetadataSources sources = new MetadataSources(serviceRegistry)
+                        .addAnnotatedClass(Application.class)
+                        .addAnnotatedClass(Event.class)
+                        .addAnnotatedClass(History.class)
+                        .addAnnotatedClass(Parameter.class)
+                        .addAnnotatedClass(Resource.class)
+                        .addAnnotatedClass(ResourceUser.class);
+                sessionFactory = sources.buildMetadata().buildSessionFactory();
+            } catch (IOException ex) {
+                Logger.getLogger(HibernateUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         /**
         * Получить фабрику сессий
         * @return {@link SessionFactory}
         */
-        public static SessionFactory getSessionFactory() {
+        public static SessionFactory getSessionFactory(){
             if (sessionFactory == null)
                 configureSessionFactory();
             return sessionFactory;
         }
+        
+        private static File getFile(String path) throws IOException{
+            InputStream in = HibernateUtil.class.getResourceAsStream(path);
+            byte[] buffer = new byte[in.available()];
+            in.read(buffer);
+
+            File targetFile = new File("temp_file.tmp");
+            OutputStream outStream = new FileOutputStream(targetFile);
+            outStream.write(buffer);
+            return targetFile;
+        }
+        
 }

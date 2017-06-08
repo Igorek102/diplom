@@ -2,3 +2,12 @@
 05.30:14.46.04DEBUG	ru.igorek.core.Main:16 - asd
 05.30:14.46.33DEBUG	ru.igorek.core.Main:16 - jdbc:mysql://localhost:3306/myDiplom
 06.05:20.22.39 INFO	ru.igorek.core.Main:77 - exit-status: 0
+06.06:00.18.21 INFO	ru.igorek.core.Main:77 - exit-status: 0
+06.06:00.21.21DEBUG	ru.igorek.core.Main:16 - hibernate/named-queries.hbm.xml
+06.06:03.27.50DEBUG	ru.igorek.core.Main:17 - hibernate/named-queries.hbm.xml
+06.06:04.45.32DEBUG	ru.igorek.core.Main:17 - hibernate/named-queries.hbm.xml
+06.06:04.47.03DEBUG	ru.igorek.core.Main:17 - hibernate/named-queries.hbm.xml
+06.06:04.53.57DEBUG	ru.igorek.core.Main:17 - hibernate/named-queries.hbm.xml
+06.06:04.59.34DEBUG	ru.igorek.core.Main:17 - 
+06.06:05.00.11DEBUG	ru.igorek.core.Main:17 - 
+06.06:05.00.34DEBUG	ru.igorek.core.Main:17 - hibernate/named-queries.hbm.xml

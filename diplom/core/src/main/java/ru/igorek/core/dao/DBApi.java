@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import jdk.nashorn.internal.runtime.UserAccessorProperty;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,16 +35,18 @@ public class DBApi {
     
     public List<Resource> getAllResources(){
         Session session = sessionFactory.openSession();
-        List<Resource> list = (List<Resource>)(session.getNamedQuery("getAllResources").list());
+        List<Resource> list = session.createCriteria(Resource.class).list();
         session.close();
         return list;
     }
     
     public List<String> getAllUrls(){
         Session session = sessionFactory.openSession();
-        List<String> list = (List<String>)(session.getNamedQuery("getAllUrls").list());
+        List<Resource> resources = session.createCriteria(Resource.class).list();
         session.close();
-        return list;
+        List<String> urls = new ArrayList<>();
+        resources.stream().forEach((resource) -> urls.add(resource.getURL()));
+        return urls;
     }
     
     public void deleteResource(String url){
@@ -99,6 +100,14 @@ public class DBApi {
         application.setHistory(history);
         application.setResource(resource);
         resource.getApplications().add(application);
+        transaction.commit();
+        session.close();
+    }
+    
+    public void updateApplication(Application application){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(application);
         transaction.commit();
         session.close();
     }
@@ -202,7 +211,7 @@ public class DBApi {
         return events;
     }
     
-    public boolean checkLoginAndPassword(String resourceUrl, String login, String password){
+    public boolean checkLoginAndPassword(String resourceUrl, String login, String password) throws NoSuchUserException{
         boolean res = false;
         Session session = sessionFactory.openSession();
         Resource resource = new Resource();
@@ -214,6 +223,11 @@ public class DBApi {
         session.close();
         if (user.isPresent())
             res = user.get().getPassword().equals(password);
+        else throw new NoSuchUserException();
         return res;
+    }
+    
+    public void closeSessionFactory(){
+        sessionFactory.close();
     }
 }

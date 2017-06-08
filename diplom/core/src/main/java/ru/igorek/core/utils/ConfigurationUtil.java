@@ -7,13 +7,14 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ru.igorek.core.Main;
 
 /**
  *
  * @author Игорек
  */
 public class ConfigurationUtil { 
-     private static final String DEFAULT_CONFIG_PATH = "etc/configurationProperties.properties"; 
+     private static final String DEFAULT_CONFIG_PATH = "/etc/configurationProperties.properties"; 
      private static final Properties configuration = new Properties(); 
      private static String pathEnv; 
      /** 
@@ -43,8 +44,7 @@ public class ConfigurationUtil {
       * @throws IOException In case of the configuration file read failure 
       */ 
      private static void loadConfiguration() throws IOException{ 
-         File nf = new File(pathEnv); 
-         InputStream in = new FileInputStream(nf);//utStream nf.getpathEnv.getClass().getResourceAsStream(pathEnv); 
+         InputStream in = Main.class.getResourceAsStream(DEFAULT_CONFIG_PATH);
          try { 
              configuration.load(in); 
          } catch (IOException ex) { 

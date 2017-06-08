@@ -1,18 +1,14 @@
 package ru.igorek.javafx;
 
-import java.util.ArrayList;
-import java.util.List;
+import ru.igorek.javafx.controllers.ResourceConnectionController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -30,6 +26,11 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @Override
+    public void stop() throws Exception {
+        ResourceConnectionController.dbApi.closeSessionFactory();
+    }
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -42,10 +43,20 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    @Override
-    public void stop() throws Exception {
-        ResourceConnectionController.getDbApi().closeSessionFactory();
-    }
     
+    public void showForm(ActionEvent actionEvent, String path, String title){
+        try {
+            Stage stage = new Stage();
+            Parent auth = FXMLLoader.load(getClass().getResource(path));
+            Scene scene = new Scene(auth);
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

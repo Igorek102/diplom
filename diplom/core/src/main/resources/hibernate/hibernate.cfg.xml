@@ -4,9 +4,9 @@
   <session-factory>
     <!-- Настройки подключения к БД -->
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://localhost:3306/diplom</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">igorek</property>
+    <property name="connection.url">jdbc:mysql://mysql14.hostland.ru:3306/host1593007</property>
+    <property name="connection.username">host1593007</property>
+    <property name="connection.password">0384a24c</property>
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.connection.pool_size">10</property>

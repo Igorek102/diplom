@@ -99,4 +99,9 @@ public class Application implements Serializable{
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
     }
+
+    @Override
+    public String toString() {
+        return "Application{" + "applicationId=" + applicationId + ", name=" + name + ", description=" + description + ", path=" + path + '}';
+    }
 }

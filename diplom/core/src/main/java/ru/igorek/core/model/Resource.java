@@ -27,9 +27,6 @@ public class Resource implements Serializable{
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @PrimaryKeyJoinColumn(name = "resource_url")
     private Set<ResourceUser> users = new HashSet<>();
-    
-    @Column(nullable = false)
-    private int port;
 
     public Resource() {
     }
@@ -56,13 +53,5 @@ public class Resource implements Serializable{
 
     public void setUsers(Set<ResourceUser> users) {
         this.users = users;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
     }
 }

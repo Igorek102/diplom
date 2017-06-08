@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="161.0" prefWidth="333.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ru.igorek.javafx.controllers.ApplicationUpdSavingController">
+    <stylesheets>
+        <URL value="@/styles/applicationupdsaving.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="31.0" layoutY="30.0" prefHeight="68.0" prefWidth="271.0" text="Вы уверены, что хотите сохранить внесенные изменения?" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="106.0" layoutY="98.0" mnemonicParsing="false" onAction="#onYesBtnClick" prefWidth="50.0" text="Да" />
+      <Button layoutX="177.0" layoutY="98.0" mnemonicParsing="false" onAction="#onNoBtnClick" prefWidth="50.0" text="Нет" />
+   </children>
+</AnchorPane>

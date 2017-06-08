@@ -7,7 +7,10 @@ import org.junit.Test;
 import ru.igorek.core.dao.DBApi;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.SessionFactory;
+import ru.igorek.core.dao.NoSuchUserException;
 import ru.igorek.core.model.Event;
 import ru.igorek.core.model.ResourceUser;
 import ru.igorek.core.model.Status;
@@ -152,6 +155,10 @@ public class TestHiber {
     
     @Test
     public void chechPass(){
-        System.out.println(dBApi.checkLoginAndPassword("127.0.0.1", "admin", "admi"));
+        try {
+            System.out.println(dBApi.checkLoginAndPassword("127.0.0.1", "admin", "admi"));
+        } catch (NoSuchUserException ex) {
+            Logger.getLogger(TestHiber.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

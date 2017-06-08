@@ -11,5 +11,6 @@
     <module>diplom-web</module>
     <module>diplom-ejb</module>
     <module>core</module>
+    <module>javafx</module>
   </modules>
 </project>
