@@ -4,6 +4,7 @@ import ru.igorek.javafx.controllers.ResourceConnectionController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -41,10 +42,10 @@ public class MainApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
     
-    public void showForm(ActionEvent actionEvent, String path, String title){
+    public void showForm(Event actionEvent, String path, String title){
         try {
             Stage stage = new Stage();
             Parent auth = FXMLLoader.load(getClass().getResource(path));

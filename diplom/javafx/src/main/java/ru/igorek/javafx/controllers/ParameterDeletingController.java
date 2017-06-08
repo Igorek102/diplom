@@ -12,22 +12,24 @@ import javafx.scene.control.Label;
  *
  * @author Игорек
  */
-public class ApplicationDeletingController implements Initializable{
+public class ParameterDeletingController implements Initializable{
+
     @FXML
     private Label delLabel;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        delLabel.setText("Вы уверены, что хотите удалить приложение '" + ApplicationsController.getSelApplName() + "'?");
-    }
-    
+        delLabel.setText("Вы уверены, что хотите удалить параметр '" + ApplicationUpdatingController.getSelParamName() + "'?");
+    } 
+
     @FXML
-    public void onYesBtnClick(ActionEvent actionEvent){
-        ApplicationsController.del();
+    private void onYesBtnClick(ActionEvent actionEvent) {
+        ApplicationUpdatingController.delParam();
         onNoBtnClick(actionEvent);
     }
+
     @FXML
-    public void onNoBtnClick(ActionEvent actionEvent){
+    private void onNoBtnClick(ActionEvent actionEvent) {
         new AuthorisationWindowController().onCancelBtnClick(actionEvent);
     }
 }

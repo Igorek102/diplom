@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="415.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.ApplicationUpdatingController">
-    <stylesheets>
-        <URL value="@/styles/applicationupdating.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="630.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.ApplicationUpdatingController">
    <children>
-      <TextField fx:id="nameTF" focusTraversable="false" layoutX="164.0" layoutY="46.0" />
-      <TextField fx:id="pathTF" focusTraversable="false" layoutX="164.0" layoutY="222.0" />
-      <Label layoutX="108.0" layoutY="51.0" text="Имя:" />
-      <Label layoutX="71.0" layoutY="138.0" text="Описание:" textAlignment="RIGHT" />
-      <Label layoutX="107.0" layoutY="227.0" text="Путь:" />
-      <Button focusTraversable="false" layoutX="96.0" layoutY="295.0" mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="95.0" text="Сохранить" />
-      <Button layoutX="225.0" layoutY="295.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="95.0" text="Отмена" />
-      <TextArea fx:id="descTF" focusTraversable="false" layoutX="164.0" layoutY="89.0" prefHeight="119.0" prefWidth="187.0" wrapText="true" />
+      <TextField fx:id="nameTF" focusTraversable="false" layoutX="90.0" layoutY="30.0" />
+      <TextField fx:id="pathTF" focusTraversable="false" layoutX="91.0" layoutY="85.0" />
+      <Label layoutX="34.0" layoutY="35.0" text="Имя:" />
+      <Label layoutX="323.0" layoutY="35.0" text="Описание:" textAlignment="RIGHT" />
+      <Label layoutX="34.0" layoutY="90.0" text="Путь:" />
+      <Button focusTraversable="false" layoutX="324.0" layoutY="478.0" mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="95.0" text="Ок" />
+      <Button layoutX="467.0" layoutY="478.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="95.0" text="Отмена" />
+      <TextArea fx:id="descTF" focusTraversable="false" layoutX="409.0" layoutY="25.0" prefHeight="93.0" prefWidth="187.0" wrapText="true" />
+      <Separator layoutX="-27.0" layoutY="136.0" prefHeight="3.0" prefWidth="656.0" />
+      <Label layoutX="50.0" layoutY="151.0" text="Параметры:" />
+      <Separator layoutX="-57.0" layoutY="456.0" prefHeight="0.0" prefWidth="687.0" />
+      <TableView fx:id="parametersTV" layoutX="15.0" layoutY="186.0" prefHeight="256.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="135.0" text="Имя" />
+          <TableColumn fx:id="descCol" prefWidth="317.0" text="Описание" />
+            <TableColumn fx:id="valCol" prefWidth="145.0" text="Флаг" />
+            <TableColumn fx:id="idCol" prefWidth="75.0" text="Column X" visible="false" />
+        </columns>
+      </TableView>
+      <Button focusTraversable="false" layoutX="184.0" layoutY="146.0" mnemonicParsing="false" onAction="#onAddPar" prefWidth="100.0" text="Добавить" />
+      <Button focusTraversable="false" layoutX="310.0" layoutY="146.0" mnemonicParsing="false" onAction="#onDelPar" prefWidth="100.0" text="Удалить" />
+      <Button focusTraversable="false" layoutX="431.0" layoutY="146.0" mnemonicParsing="false" onAction="#onChPar" prefWidth="100.0" text="Изменить" />
    </children>
 </AnchorPane>

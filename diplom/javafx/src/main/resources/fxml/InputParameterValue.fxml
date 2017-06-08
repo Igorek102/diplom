@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="393.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ru.igorek.javafx.controllers.InputParameterValueController">
+    <stylesheets>
+        <URL value="@/styles/inputparametervalue.css" />
+    </stylesheets>
+   <children>
+      <Label fx:id="textLabel" layoutX="102.0" layoutY="38.0" prefHeight="60.0" prefWidth="189.0" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="valueTF" layoutX="103.0" layoutY="109.0" />
+      <Button layoutX="103.0" layoutY="165.0" mnemonicParsing="false" onAction="#onOkBtnClick" prefWidth="80.0" text="Ок" />
+      <Button layoutX="210.0" layoutY="165.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="80.0" text="Отмена" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="339.0" prefWidth="377.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ru.igorek.javafx.controllers.SaveOrUpdateParameterController">
+    <stylesheets>
+        <URL value="@/styles/saveorupdateparameter.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="77.0" layoutY="44.0" text="Имя:" />
+      <Label layoutX="41.0" layoutY="80.0" text="Описание:" />
+      <TextField fx:id="nameTF" focusTraversable="false" layoutX="133.0" layoutY="39.0" />
+      <TextArea fx:id="descTA" focusTraversable="false" layoutX="133.0" layoutY="80.0" prefHeight="123.0" prefWidth="187.0" />
+      <Label focusTraversable="false" layoutX="41.0" layoutY="219.0" prefHeight="31.0" prefWidth="197.0" text="Параметр является флагом:" textAlignment="RIGHT" wrapText="true" />
+      <CheckBox fx:id="isFlacgCB" layoutX="249.0" layoutY="224.0" mnemonicParsing="false" />
+      <Button layoutX="93.0" layoutY="273.0" mnemonicParsing="false" onAction="#onOkBtnClick" prefWidth="80.0" text="Ок" />
+      <Button layoutX="209.0" layoutY="273.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="80.0" text="Отмена" />
+   </children>
+</AnchorPane>

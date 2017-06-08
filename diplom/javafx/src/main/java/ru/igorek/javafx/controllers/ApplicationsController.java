@@ -11,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import ru.igorek.core.model.Application;
 import ru.igorek.javafx.MainApp;
 import static ru.igorek.javafx.controllers.ResourceConnectionController.dbApi;
@@ -41,17 +43,20 @@ public class ApplicationsController implements Initializable {
     
     private final String appUpdPath = "/fxml/ApplicationUpdating.fxml";
     private final String appDelPath = "/fxml/ApplicationDeleting.fxml";
+    private final String appRegPath = "/fxml/ApplRegForm.fxml";
+    private final String startFormPath = "/fxml/StartApplicationForm.fxml";
     
     private final MainApp mainApp = new MainApp();
     private static Application curApplication;
     
-    private static ObservableList<Application> applications = FXCollections.observableArrayList(dbApi.getApplicationsByResource(ResourceConnectionController.getCurUrl()));
+    private static ObservableList<Application> applications;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        applications = FXCollections.observableArrayList(dbApi.getApplicationsByResource(ResourceConnectionController.getCurUrl()));
         appls = applicationsTV;
         applications.addListener((ListChangeListener.Change<? extends Application> c) -> {
             appls.setItems(applications);
@@ -74,11 +79,21 @@ public class ApplicationsController implements Initializable {
         });
     }    
     
+    public void onAnotherRes(ActionEvent actionEvent){
+        try {
+            new MainApp().start((Stage)(((Node)actionEvent.getSource()).getScene().getWindow()));
+        } catch (Exception ex) {
+            Logger.getLogger(ApplicationsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void onStartBtnClick(ActionEvent actionEvent){
         if (appls.getSelectionModel().isEmpty()){
             new ErrorDialog().showErrorDialog(actionEvent, "Selection Error", "Приложение не выбрано!");
             return;
         }
+        curApplication = (Application)appls.getSelectionModel().getSelectedItem();
+        new MainApp().showForm(actionEvent, startFormPath, "Application Start");
     }
     
     public void onDeleteBtnClick(ActionEvent actionEvent){
@@ -90,7 +105,7 @@ public class ApplicationsController implements Initializable {
     }
     
     public void onRegBtnClick(ActionEvent actionEvent){
-        applicationsTV.getItems().stream().forEach((application) -> System.out.println(application));
+        mainApp.showForm(actionEvent, appRegPath, "Application Redactor");
     }
     
     public void onUpdateBtnClick(ActionEvent actionEvent){
@@ -99,10 +114,9 @@ public class ApplicationsController implements Initializable {
             return;
         }
         curApplication = (Application)appls.getSelectionModel().getSelectedItem();
-        mainApp.showForm(actionEvent, appUpdPath, "Application Updating");
+        mainApp.showForm(actionEvent, appUpdPath, "Application Redactor");
     }
     public static void refresh(){
-        applications.stream().forEach((application) -> System.out.println(application));
         int index = applications.indexOf(curApplication);
         Application application = new Application();
         application.setApplicationId(curApplication.getApplicationId());
@@ -111,6 +125,9 @@ public class ApplicationsController implements Initializable {
         application.setPath(curApplication.getPath());
         applications.remove(curApplication);
         applications.add(index, application);
+    }
+    public static void add(Application application){
+        applications.add(application);
     }
     public static void del(){
         Application application = (Application)appls.getSelectionModel().getSelectedItem();

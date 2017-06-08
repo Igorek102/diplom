@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="378.0" prefWidth="651.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ru.igorek.javafx.controllers.StartApplicationFormController">
+    <stylesheets>
+        <URL value="@/styles/startapplicationform.css" />
+    </stylesheets>
+   <children>
+      <Label fx:id="applicationNameLabel" layoutX="59.0" layoutY="23.0" prefHeight="21.0" prefWidth="298.0">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="192.0" layoutY="308.0" mnemonicParsing="false" onAction="#onStartBtnClick" prefWidth="100.0" text="Запустить" />
+      <Button layoutX="359.0" layoutY="308.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="100.0" text="Отмена" />
+      <TableView fx:id="avParamsTV" layoutX="59.0" layoutY="96.0" prefHeight="186.0" prefWidth="247.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="89.0" text="Имя" />
+          <TableColumn fx:id="descCol" prefWidth="157.0" text="Описание" />
+        </columns>
+      </TableView>
+      <Label layoutX="59.0" layoutY="59.0" text="Список параметров:" />
+      <TableView fx:id="chParamsTV" layoutX="342.0" layoutY="96.0" prefHeight="186.0" prefWidth="253.0">
+        <columns>
+          <TableColumn fx:id="chNameCol" prefWidth="94.0" text="Имя" />
+          <TableColumn fx:id="chValueCol" prefWidth="157.0" text="Значение" />
+        </columns>
+      </TableView>
+      <Label layoutX="342.0" layoutY="59.0" text="Выбранные параматры:" />
+      <Separator layoutX="323.0" layoutY="120.0" orientation="VERTICAL" prefHeight="139.0" prefWidth="2.0" />
+   </children>
+</AnchorPane>

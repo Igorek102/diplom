@@ -23,6 +23,7 @@ import ru.igorek.core.dao.NoSuchUserException;
 public class AuthorisationWindowController {
     @FXML
     private TextField login, password;
+    private static String curUserLogin, curUserPassword;
     
     public void onEnterBtnClick(ActionEvent actionEvent){
         String log = login.getText();
@@ -35,6 +36,8 @@ public class AuthorisationWindowController {
         try {
             boolean isAuthCorrect = ResourceConnectionController.dbApi.checkLoginAndPassword(ResourceConnectionController.getCurUrl(), log, pass);
             if (isAuthCorrect){
+                curUserLogin = log;
+                curUserPassword = pass;
                 onCancelBtnClick(actionEvent);
                 showResourceApplications(mainWindow);
             }
@@ -48,9 +51,10 @@ public class AuthorisationWindowController {
                 int port = Integer.parseInt(curUrl.substring(curUrl.indexOf(":") + 1, curUrl.length()));
                 ResourceConnectionController.sshApi.closeSession(ResourceConnectionController.sshApi.initSession(url, port, log, pass));
                 ResourceConnectionController.dbApi.addUserToResource(ResourceConnectionController.getCurUrl(), log, pass);
+                curUserLogin = log;
+                curUserPassword = pass;
                 onCancelBtnClick(actionEvent);
                 showResourceApplications(mainWindow);
-                
             } catch (JSchException ex1) {
                 showErrorAuthorisationDialog(actionEvent);
             }
@@ -62,7 +66,7 @@ public class AuthorisationWindowController {
     }
     private void showResourceApplications(Window mainWindow){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Applications.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Appls.fxml"));
             Scene applicationsScene = new Scene(root);
             ((Stage)mainWindow).setScene(applicationsScene);
         } catch (IOException ex) {
@@ -71,5 +75,13 @@ public class AuthorisationWindowController {
     }
     private void showErrorAuthorisationDialog(ActionEvent actionEvent){
         new ErrorDialog().showErrorDialog(actionEvent, "Error Authorisation", "Логин или пароль введен неверно!");
+    }
+
+    public static String getCurUserLogin() {
+        return curUserLogin;
+    }
+
+    public static String getCurUserPassword() {
+        return curUserPassword;
     }
 }
