@@ -1,0 +1,1 @@
+06.08:19.55.40ERROR	ru.igorek.core.Main:40 - com.jcraft.jsch.JSchException: SSH_MSG_DISCONNECT: 2 Too many authentication failures 
