@@ -67,7 +67,7 @@ public class ResourceConnectionController implements Initializable {
     
     public void onConnectBtnClick(ActionEvent actionEvent){
         if (resources.getSelectionModel().isEmpty()){
-            new ErrorDialog().showErrorDialog(actionEvent, "Resource Selection Error", "Ресурс не выбран!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Ресурс не выбран!");
             return;
         }
         currentResourceUrl = (String)resources.getSelectionModel().getSelectedItem();

@@ -15,7 +15,7 @@ public class ResourceRegistrationController{
     
     public void onReg(ActionEvent actionEvent){
         if (urlTf.getText().equals("") || portTf.getText().equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Input Error", "Все поля должны быть заполнены!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Все поля должны быть заполнены!");
             return;
         }
         String resourceUrl = urlTf.getText() + ":" + portTf.getText();

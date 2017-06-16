@@ -29,7 +29,7 @@ public class AuthorisationWindowController {
         String log = login.getText();
         String pass = password.getText();
         if (log.equals("") || pass.equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Input Error", "Все поля должны быть заполнены!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Все поля должны быть заполнены!");
             return;
         }
         Window mainWindow = ((Stage)(((Node)actionEvent.getSource()).getScene().getWindow())).getOwner();
@@ -74,7 +74,7 @@ public class AuthorisationWindowController {
         }
     }
     private void showErrorAuthorisationDialog(ActionEvent actionEvent){
-        new ErrorDialog().showErrorDialog(actionEvent, "Error Authorisation", "Логин или пароль введен неверно!");
+        new ErrorDialog().showErrorDialog(actionEvent, "Ошибка авторизации", "Логин или пароль введен неверно!");
     }
 
     public static String getCurUserLogin() {

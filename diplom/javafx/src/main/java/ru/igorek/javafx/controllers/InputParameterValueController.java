@@ -25,7 +25,7 @@ public class InputParameterValueController implements Initializable {
     }    
     public void onOkBtnClick(ActionEvent actionEvent){
         if (valueTF.getText().equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Incorrect Input", "Введите значение!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Введите значение!");
             return;
         }
         onCancelBtnClick(actionEvent);

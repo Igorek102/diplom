@@ -35,7 +35,28 @@
     </Tab>
     <Tab text="Журнал">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.3993610223642173" layoutX="1.0" prefHeight="440.0" prefWidth="628.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <ListView fx:id="applsHistory" layoutX="23.0" layoutY="42.0" prefHeight="348.0" prefWidth="200.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <TableView layoutX="36.0" layoutY="42.0" prefHeight="345.0" prefWidth="304.0" AnchorPane.rightAnchor="32.0">
+                                <columns>
+                                  <TableColumn fx:id="dateCol" prefWidth="117.0" text="Дата" />
+                                  <TableColumn fx:id="resCol" prefWidth="186.0" text="Результат" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>

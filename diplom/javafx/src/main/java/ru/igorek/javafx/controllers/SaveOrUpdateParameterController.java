@@ -41,7 +41,7 @@ public class SaveOrUpdateParameterController implements Initializable{
     
     public void onOkBtnClick(ActionEvent actionEvent){
         if (nameTF.getText().equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Input Error", "Поле 'Имя' является обязательны для заполнения!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Поле 'Имя' является обязательны для заполнения!");
             return;
         }
         String newName = nameTF.getText(), newDesc = descTA.getText();

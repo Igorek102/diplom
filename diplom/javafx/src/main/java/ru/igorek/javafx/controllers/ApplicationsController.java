@@ -89,7 +89,7 @@ public class ApplicationsController implements Initializable {
     
     public void onStartBtnClick(ActionEvent actionEvent){
         if (appls.getSelectionModel().isEmpty()){
-            new ErrorDialog().showErrorDialog(actionEvent, "Selection Error", "Приложение не выбрано!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Приложение не выбрано!");
             return;
         }
         curApplication = (Application)appls.getSelectionModel().getSelectedItem();
@@ -98,23 +98,23 @@ public class ApplicationsController implements Initializable {
     
     public void onDeleteBtnClick(ActionEvent actionEvent){
         if (appls.getSelectionModel().isEmpty()){
-            new ErrorDialog().showErrorDialog(actionEvent, "Selection Error", "Приложение не выбрано!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Приложение не выбрано!");
             return;
         }
-        new MainApp().showForm(actionEvent, appDelPath, "Application Deleting");
+        new MainApp().showForm(actionEvent, appDelPath, "Удаление приложения");
     }
     
     public void onRegBtnClick(ActionEvent actionEvent){
-        mainApp.showForm(actionEvent, appRegPath, "Application Redactor");
+        mainApp.showForm(actionEvent, appRegPath, "Регистрация приложения");
     }
     
     public void onUpdateBtnClick(ActionEvent actionEvent){
         if (appls.getSelectionModel().isEmpty()){
-            new ErrorDialog().showErrorDialog(actionEvent, "Selection Error", "Приложение не выбрано!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Приложение не выбрано!");
             return;
         }
         curApplication = (Application)appls.getSelectionModel().getSelectedItem();
-        mainApp.showForm(actionEvent, appUpdPath, "Application Redactor");
+        mainApp.showForm(actionEvent, appUpdPath, "Редактирование");
     }
     public static void refresh(){
         int index = applications.indexOf(curApplication);

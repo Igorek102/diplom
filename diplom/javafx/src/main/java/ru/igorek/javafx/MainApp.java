@@ -26,7 +26,7 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
 
-        stage.setTitle("Java Application Starter");
+        stage.setTitle("Подключение к ресурсу");
         stage.setMinWidth(300);
         stage.setMinHeight(200);
         stage.setScene(scene);

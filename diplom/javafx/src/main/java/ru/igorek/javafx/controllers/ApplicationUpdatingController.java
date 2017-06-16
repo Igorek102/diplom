@@ -77,7 +77,7 @@ public class ApplicationUpdatingController implements Initializable{
     
     public void onSaveBtnClick(ActionEvent actionEvent){
         if (nameTF.getText().equals("") || pathTF.getText().equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Input Error", "Поля 'Имя' и 'Путь' обязательны для заполнения!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Поля 'Имя' и 'Путь' обязательны для заполнения!");
             return;
         }
         String newName = nameTF.getText(), newDesc = descTF.getText(), newPath = pathTF.getText();
@@ -106,7 +106,7 @@ public class ApplicationUpdatingController implements Initializable{
     }
     public void onDelPar(ActionEvent actionEvent){
         if (params.getSelectionModel().isEmpty()){
-            new ErrorDialog().showErrorDialog(actionEvent, "Selection Error", "Параметр не выбран!");
+            new ErrorDialog().showErrorDialog(actionEvent, "", "Параметр не выбран!");
             return;
         }
         new MainApp().showForm(actionEvent, paramDelPath, "Application Deleting");

@@ -24,7 +24,7 @@ public class ApplRegFormController{
         String name = nameTF.getText();
         String path = pathTF.getText();
         if (name.equals("") || path.equals("")){
-            new ErrorDialog().showErrorDialog(actionEvent, "Input Error", "Поля 'Имя' и 'Путь' обязательны для заполнения!");
+            new ErrorDialog().showErrorDialog(actionEvent, "Ошибка ввода", "Поля 'Имя' и 'Путь' обязательны для заполнения!");
             return;
         }
         Application application = ResourceConnectionController.dbApi.addApplicationToResource(ResourceConnectionController.getCurUrl(), name, descTF.getText(), path);
