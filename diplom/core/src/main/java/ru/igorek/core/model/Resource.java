@@ -21,6 +21,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Resource implements Serializable{
     @Id
     private String URL;
+    private String domainName;
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Application> applications = new ArrayList<>();
     
@@ -53,5 +54,13 @@ public class Resource implements Serializable{
 
     public void setUsers(Set<ResourceUser> users) {
         this.users = users;
+    }
+
+    public String getDomainName() {
+        return domainName;
+    }
+
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
     }
 }

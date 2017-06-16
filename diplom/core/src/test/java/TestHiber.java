@@ -29,9 +29,7 @@ public class TestHiber {
     
     @Test
     public void addResource(){
-        for (int i = 1; i < 20; i++) {
-            dBApi.addResource("127.0.0." + i);
-        }
+        
     }
     
     @Test

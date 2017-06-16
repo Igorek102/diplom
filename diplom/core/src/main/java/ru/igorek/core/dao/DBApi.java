@@ -23,11 +23,12 @@ import ru.igorek.core.utils.HibernateUtil;
 public class DBApi {
     private static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     //
-    public void addResource(String url){
+    public void addResource(String url, String domName){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Resource resource = new Resource();
         resource.setURL(url);
+        resource.setDomainName(domName);
         session.persist(resource);
         transaction.commit();
         session.close();
