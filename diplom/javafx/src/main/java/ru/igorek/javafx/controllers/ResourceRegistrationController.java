@@ -3,6 +3,7 @@ package ru.igorek.javafx.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import ru.igorek.core.model.Resource;
 
 /**
  * FXML Controller class
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
  */
 public class ResourceRegistrationController{  
     @FXML
-    TextField urlTf, portTf;
+    TextField urlTf, portTf, domainNameTF;
     
     public void onReg(ActionEvent actionEvent){
         if (urlTf.getText().equals("") || portTf.getText().equals("")){
@@ -19,8 +20,12 @@ public class ResourceRegistrationController{
             return;
         }
         String resourceUrl = urlTf.getText() + ":" + portTf.getText();
-        ResourceConnectionController.dbApi.addResource(resourceUrl);
-        ResourceConnectionController.refresh(resourceUrl);
+        String domainName = domainNameTF.getText();
+        Resource resource = new Resource();
+        resource.setURL(resourceUrl);
+        resource.setDomainName(domainName);
+        ResourceConnectionController.dbApi.addResource(resourceUrl, domainName);
+        ResourceConnectionController.refresh(resource);
         onCanc(actionEvent);
     }
     public void onCanc(ActionEvent actionEvent){

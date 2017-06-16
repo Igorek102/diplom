@@ -23,19 +23,28 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.igorek.core.dao.DBApi;
 import ru.igorek.core.dao.SshApi;
+import ru.igorek.core.model.Application;
+import ru.igorek.core.model.Resource;
 import ru.igorek.javafx.MainApp;
 
 public class ResourceConnectionController implements Initializable {
     @FXML
     private TextField resourceUrlTf;
     @FXML
-    private ListView resources;
+    private TableView resources;
+    @FXML
+    private TableColumn<Resource, String> urlCol;
+    @FXML
+    private TableColumn<Resource, String> domainNameCol;
     
     private final String authPath = "/fxml/AuthorisationWindow.fxml";
     private final String newResPath = "/fxml/ResourceRegistration.fxml";
@@ -44,21 +53,23 @@ public class ResourceConnectionController implements Initializable {
     public static SshApi sshApi = new SshApi();
     private static String currentResourceUrl;
     
-    private static ObservableList<String> urls = FXCollections.observableArrayList(dbApi.getAllUrls());
+    private static ObservableList<Resource> urls = FXCollections.observableArrayList(dbApi.getAllResources());
     private final MainApp mainApp = new MainApp();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        urls.addListener((ListChangeListener.Change<? extends String> c) -> {
+        urlCol.setCellValueFactory(new PropertyValueFactory<>("URL"));
+        domainNameCol.setCellValueFactory(new PropertyValueFactory<>("domainName"));
+        urls.addListener((ListChangeListener.Change<? extends Resource> c) -> {
             resources.setItems(urls);
         });
         
         resources.setItems(urls);
         
         resourceUrlTf.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            ObservableList<String> visibleUrls = FXCollections.observableArrayList();
+            ObservableList<Resource> visibleUrls = FXCollections.observableArrayList();
             urls.stream().forEach((resUrl) ->{
-                if (resUrl.startsWith(newValue))
+                if (resUrl.getURL().startsWith(newValue) || resUrl.getDomainName().startsWith(newValue))
                     visibleUrls.add(resUrl);
             });
             resources.setItems(visibleUrls);
@@ -70,7 +81,7 @@ public class ResourceConnectionController implements Initializable {
             new ErrorDialog().showErrorDialog(actionEvent, "", "Ресурс не выбран!");
             return;
         }
-        currentResourceUrl = (String)resources.getSelectionModel().getSelectedItem();
+        currentResourceUrl = ((Resource)resources.getSelectionModel().getSelectedItem()).getURL();
         String url = currentResourceUrl.substring(0, currentResourceUrl.indexOf(":"));
         int port = Integer.parseInt(currentResourceUrl.substring(currentResourceUrl.indexOf(":") + 1, currentResourceUrl.length()));
         boolean isResourceAvailable = sshApi.isResourceAvailable(url,port);
@@ -83,7 +94,7 @@ public class ResourceConnectionController implements Initializable {
     public void onNewResourceBtnClick(ActionEvent actionEvent){
         mainApp.showForm(actionEvent, newResPath, "Регистрация ресурса");
     }
-    public static void refresh(String newRes){
+    public static void refresh(Resource newRes){
         urls.add(newRes);
     }
     public static String getCurUrl(){
