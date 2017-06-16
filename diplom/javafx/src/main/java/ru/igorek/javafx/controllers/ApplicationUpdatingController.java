@@ -102,19 +102,19 @@ public class ApplicationUpdatingController implements Initializable{
         selectedParameter.setFlag(false);
         selectedParameter.setParameterDescription("");
         selectedParameter.setParameterName("");
-        new MainApp().showForm(actionEvent, paramSorUPath, "Parameter Editor");
+        new MainApp().showForm(actionEvent, paramSorUPath, "Добавление параметра");
     }
     public void onDelPar(ActionEvent actionEvent){
         if (params.getSelectionModel().isEmpty()){
             new ErrorDialog().showErrorDialog(actionEvent, "", "Параметр не выбран!");
             return;
         }
-        new MainApp().showForm(actionEvent, paramDelPath, "Application Deleting");
+        new MainApp().showForm(actionEvent, paramDelPath, "Удаление приложения");
     }
     
     public void onChPar(ActionEvent actionEvent){
         selectedParameter = (Parameter)params.getSelectionModel().getSelectedItem();
-        new MainApp().showForm(actionEvent, paramSorUPath, "Parameter Editor");
+        new MainApp().showForm(actionEvent, paramSorUPath, "Редактирование параметра");
     }
     public static void addParam(Parameter parameter){
         parameters.add(parameter);

@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="197.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.AuthorisationWindowController">
    <children>
-      <TextField fx:id="login" focusTraversable="false" layoutX="89.0" layoutY="37.0" promptText="Login" />
+      <TextField fx:id="login" focusTraversable="false" layoutX="89.0" layoutY="37.0" promptText="Логин" />
       <Button fx:id="enterBtn" layoutX="89.0" layoutY="131.0" mnemonicParsing="false" onAction="#onEnterBtnClick" prefWidth="80.0" text="Вход" />
       <Button fx:id="cancelBtn" layoutX="196.0" layoutY="131.0" mnemonicParsing="false" onAction="#onCancelBtnClick" prefWidth="80.0" text="Отмена" />
-      <PasswordField fx:id="password" focusTraversable="false" layoutX="89.0" layoutY="83.0" promptText="Password" />
+      <PasswordField fx:id="password" focusTraversable="false" layoutX="89.0" layoutY="83.0" promptText="Пароль" />
    </children>
 </AnchorPane>

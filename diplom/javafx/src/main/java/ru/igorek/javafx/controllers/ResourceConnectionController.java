@@ -75,13 +75,13 @@ public class ResourceConnectionController implements Initializable {
         int port = Integer.parseInt(currentResourceUrl.substring(currentResourceUrl.indexOf(":") + 1, currentResourceUrl.length()));
         boolean isResourceAvailable = sshApi.isResourceAvailable(url,port);
         if (isResourceAvailable)
-            mainApp.showForm(actionEvent, authPath, "Authorisation");
+            mainApp.showForm(actionEvent, authPath, "Авторизация");
         else {
-            new ErrorDialog().showErrorDialog(actionEvent, "Resource is not available", "Не удается установить соединение!");
+            new ErrorDialog().showErrorDialog(actionEvent, "Ресурс недоступен", "Не удается установить соединение!");
         }
     }
     public void onNewResourceBtnClick(ActionEvent actionEvent){
-        mainApp.showForm(actionEvent, newResPath, "Resource Registration");
+        mainApp.showForm(actionEvent, newResPath, "Регистрация ресурса");
     }
     public static void refresh(String newRes){
         urls.add(newRes);

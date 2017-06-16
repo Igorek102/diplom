@@ -68,7 +68,9 @@ public class AuthorisationWindowController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Appls.fxml"));
             Scene applicationsScene = new Scene(root);
-            ((Stage)mainWindow).setScene(applicationsScene);
+            Stage stage = ((Stage)mainWindow);
+            stage.setTitle("Шаблонизатор запуска");
+            stage.setScene(applicationsScene);
         } catch (IOException ex) {
             Logger.getLogger(AuthorisationWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }

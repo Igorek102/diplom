@@ -1,6 +1,7 @@
 package ru.igorek.javafx.controllers;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -86,8 +87,10 @@ public class StartApplicationFormController implements Initializable {
         String login = AuthorisationWindowController.getCurUserLogin();
         String pass = AuthorisationWindowController.getCurUserPassword();
         String command = getCommand();
-        List<String> result = ResourceConnectionController.sshApi.startApplication(url, port, login, pass, command);
-        result.stream().forEach((string) -> System.out.println(string));
+        String result = ResourceConnectionController.sshApi.startApplication(url, port, login, pass, command);
+        //result.stream().forEach((string) -> System.out.println(string));
+        ResourceConnectionController.dbApi.addEventToHistory(ApplicationsController.getCurApplication().getApplicationId(), new Date(), result);
+        onCancelBtnClick(actionEvent);
     }
     public void onCancelBtnClick(ActionEvent actionEvent){
         new AuthorisationWindowController().onCancelBtnClick(actionEvent);

@@ -27,7 +27,7 @@
                   </TableView>
                   <Button fx:id="delBtn" focusTraversable="false" layoutX="87.0" layoutY="374.0" mnemonicParsing="false" onAction="#onDeleteBtnClick" prefHeight="35.0" prefWidth="100.0" text="Удалить" AnchorPane.bottomAnchor="31.0" />
                   <Button fx:id="startBtn" focusTraversable="false" layoutX="87.0" layoutY="328.0" mnemonicParsing="false" onAction="#onStartBtnClick" prefHeight="35.0" prefWidth="100.0" text="Запустить" AnchorPane.bottomAnchor="77.0" />
-                  <Button fx:id="regBtn" focusTraversable="false" layoutX="373.0" layoutY="328.0" mnemonicParsing="false" onAction="#onRegBtnClick" prefHeight="57.0" prefWidth="168.0" text="Зарегестрировать новое прилоежение" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="55.0" />
+                  <Button fx:id="regBtn" focusTraversable="false" layoutX="373.0" layoutY="328.0" mnemonicParsing="false" onAction="#onRegBtnClick" prefHeight="57.0" prefWidth="168.0" text="Зарегистрировать новое прилоежение" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="55.0" />
                   <Button fx:id="updateBtn" focusTraversable="false" layoutX="223.0" layoutY="328.0" mnemonicParsing="false" onAction="#onUpdateBtnClick" prefHeight="35.0" text="Редактировать" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="223.0" />
                   <Button layoutX="356.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAnotherRes" text="Подключиться к другому ресурсу" AnchorPane.rightAnchor="21.0" />
                </children></AnchorPane>
@@ -37,25 +37,21 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.3993610223642173" layoutX="1.0" prefHeight="440.0" prefWidth="628.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <ListView fx:id="applsHistory" layoutX="23.0" layoutY="42.0" prefHeight="348.0" prefWidth="200.0" />
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TableView layoutX="36.0" layoutY="42.0" prefHeight="345.0" prefWidth="304.0" AnchorPane.rightAnchor="32.0">
-                                <columns>
-                                  <TableColumn fx:id="dateCol" prefWidth="117.0" text="Дата" />
-                                  <TableColumn fx:id="resCol" prefWidth="186.0" text="Результат" />
-                                </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
+                  <TableView fx:id="historyTable" layoutX="275.0" layoutY="34.0" prefHeight="345.0" prefWidth="304.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="34.0">
+                    <columns>
+                      <TableColumn fx:id="dateCol" maxWidth="300.0" minWidth="117.0" prefWidth="117.0" text="Дата" />
+                      <TableColumn fx:id="resCol" prefWidth="186.0" text="Результат" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <TableView fx:id="applsHistory" layoutX="38.0" layoutY="34.0" prefHeight="341.0" prefWidth="200.0" AnchorPane.bottomAnchor="61.0" AnchorPane.topAnchor="34.0">
+                    <columns>
+                      <TableColumn fx:id="happlCol" prefWidth="199.0" text="Название приложения" />
+                      <TableColumn fx:id="hidCol" minWidth="0.0" prefWidth="0.0" text="C2" visible="false" />
+                    </columns>
+                  </TableView>
                </children></AnchorPane>
       </content>
     </Tab>
