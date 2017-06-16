@@ -1,0 +1,2 @@
+DEFAULT_HIBERNATE_CONFIG_PATH=src/main/resources/hibernate/hibernate.cfg.xml
+HIBERNATE_NAMED_QUERIES=hibernate/named-queries.hbm.xml

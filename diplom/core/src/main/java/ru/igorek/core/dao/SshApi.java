@@ -28,7 +28,6 @@ public class SshApi {
     public List<String> startApplication(String resourceUrl, int port, String userLogin, String password, String command){
         List<String> lines = new ArrayList<>();
         try {
-            //String command = "java -jar d:\\bkparse\\target\\bkparse-1.0-SNAPSHOT.jar";
             Session session = initSession(resourceUrl, port, userLogin, password);
             Channel channel = initChannel(command, session);
             channel.connect();
@@ -105,11 +104,12 @@ public class SshApi {
         boolean isAvailabe = false;
         try{
             JSch jSch = new JSch();
-            Session session = jSch.getSession("`",resourceUrl, port);
+            Session session = jSch.getSession("",resourceUrl, port);
             session.setConfig("StrictHostKeyChecking", "no");
             session.connect(CONNECTION_TIMEOUT);
         }
         catch(Exception e){
+            System.out.println(e.getMessage());
             if (e.getMessage().equals("Auth fail"))
                 isAvailabe = true;
         }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="177.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.igorek.javafx.controllers.NoInternetController">
+   <children>
+      <Button layoutX="216.0" layoutY="117.0" mnemonicParsing="false" onAction="#onCancelBtn" prefWidth="95.0" text="Отмена" />
+      <Button layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#onRepeatBtn" prefWidth="95.0" text="Повторить" />
+      <Label layoutX="67.0" layoutY="14.0" prefHeight="108.0" prefWidth="247.0" text="Для работы приложения требуется наличие интернет-соединения!" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>

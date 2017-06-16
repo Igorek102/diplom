@@ -40,15 +40,7 @@ public class ResourceConnectionController implements Initializable {
     private final String authPath = "/fxml/AuthorisationWindow.fxml";
     private final String newResPath = "/fxml/ResourceRegistration.fxml";
     
-    public static DBApi dbApi;
-    {
-        try{
-            dbApi = new DBApi();
-        }
-        catch(Exception ex){
-            
-        }
-    }
+    public static DBApi dbApi = new DBApi();;
     public static SshApi sshApi = new SshApi();
     private static String currentResourceUrl;
     

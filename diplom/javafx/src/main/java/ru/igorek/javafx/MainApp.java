@@ -21,28 +21,14 @@ import ru.igorek.core.utils.HibernateUtil;
 
 public class MainApp extends Application {
     @Override
-    public void start(Stage stage){
-        Parent root;
-        Scene scene;
-        try{
-            root = FXMLLoader.load(getClass().getResource("/fxml/ResourceConnection.fxml"));
-            scene = new Scene(root);
-            scene.getStylesheets().add("/styles/Styles.css");
+    public void start(Stage stage) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ResourceConnection.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
 
-            stage.setTitle("Java Application Starter");
-            stage.setMinWidth(300);
-            stage.setMinHeight(200);
-        }
-        catch(Throwable ex){
-            try {
-                root = FXMLLoader.load(getClass().getResource("/fxml/ResourceConnection.fxml"));
-            } catch (IOException ex1) {
-                root = null;
-            }
-            
-            stage.setTitle("No internate connection");
-        }
-        scene = new Scene(root);
+        stage.setTitle("Java Application Starter");
+        stage.setMinWidth(300);
+        stage.setMinHeight(200);
         stage.setScene(scene);
         stage.show();
     }
@@ -63,6 +49,7 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
     
     public void showForm(Event actionEvent, String path, String title){
         try {

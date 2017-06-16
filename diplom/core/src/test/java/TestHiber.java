@@ -41,12 +41,6 @@ public class TestHiber {
     }
     
     @Test
-    public void getAllUrls(){
-        List<String> urls = dBApi.getAllUrls();
-        urls.stream().forEach((url) -> System.out.println(url));
-    }
-    
-    @Test
     public void deleteResource(){
         dBApi.deleteResource("127.0.0.2");
     }
