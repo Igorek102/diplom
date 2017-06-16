@@ -205,14 +205,14 @@ public class DBApi {
     }
     
     //Здесь нужно будет добавить параметры для имента
-    public void addEventToHistory(long applicationId, Date date, Status status){
+    public void addEventToHistory(long applicationId, Date date, String message){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         History history = session.get(Application.class, applicationId).getHistory();
         Event event = new Event();
         event.setHistory(history);
-        event.setDate(date);
-        event.setStatus(status);
+        event.setDat(date);
+        event.setMessage(message);
         history.getEvents().add(event);
         transaction.commit();
         session.close();

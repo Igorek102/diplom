@@ -25,20 +25,21 @@ public class SshApi {
     
     private static final int CONNECTION_TIMEOUT = 10000;
     
-    public List<String> startApplication(String resourceUrl, int port, String userLogin, String password, String command){
-        List<String> lines = new ArrayList<>();
+    public String startApplication(String resourceUrl, int port, String userLogin, String password, String command){
+        //List<String> lines = new ArrayList<>();
+        String dataFromChannel = "";
         try {
             Session session = initSession(resourceUrl, port, userLogin, password);
             Channel channel = initChannel(command, session);
             channel.connect();
-            String dataFromChannel = getDataFromChannel(channel);
-            lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
+            dataFromChannel = getDataFromChannel(channel);
+            //lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
             channel.disconnect();
             session.disconnect();
         } catch (Exception e) {
             log.error(e);
         }
-        return lines;
+        return dataFromChannel;
     }
     
     public Session initSession(String host, int port, String userLogin, String password) throws JSchException {

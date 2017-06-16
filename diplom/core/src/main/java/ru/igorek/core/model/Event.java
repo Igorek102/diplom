@@ -19,7 +19,6 @@ public class Event implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventId;
-    private Status status;
     private Date dat;
     private String message;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,28 +28,20 @@ public class Event implements Serializable{
     public Event() {
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Date getDate() {
+    public Date getDat() {
         return dat;
     }
 
-    public void setDate(Date date) {
-        this.dat = date;
+    public void setDat(Date dat) {
+        this.dat = dat;
     }
 
-    public String getDescription() {
+    public String getMessage() {
         return message;
     }
 
-    public void setDescription(String description) {
-        this.message = description;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public long getEventId() {

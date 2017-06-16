@@ -130,19 +130,6 @@ public class TestHiber {
     }
     
     @Test
-    public void addEventToHistory(){
-        for (int i = 0; i < 5; i++) {
-            dBApi.addEventToHistory(83, new Date(), Status.FINISH);
-        }
-    }
-    
-    @Test
-    public void getHistory(){
-        List<Event> events = dBApi.getApplicationHistory(83);
-        events.stream().forEach((event) -> System.out.println(event.getDate() + " " + event.getStatus().toString()));
-    }
-    
-    @Test
     public void clearHistory(){
         dBApi.clearApplicationHistory(83);
     }
